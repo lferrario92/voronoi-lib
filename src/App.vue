@@ -8,6 +8,17 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeMount () {
+    this.$store.commit('setScreenSize', {
+      width: screen.width > 1000 ? 1000 : screen.width,
+      height: screen.height > 1000 ? 1000 : screen.height
+    })
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

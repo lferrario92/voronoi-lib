@@ -1,0 +1,28 @@
+{
+  "cities": [
+    {
+      "race": "elven",
+      "place": "deepforrest",
+      "random": true,
+      "size": 1
+    },
+    {
+      "race": "human",
+      "place": "forrest",
+      "random": true,
+      "size": 1
+    },
+    {
+      "race": "human",
+      "place": "sand",
+      "random": true,
+      "size": 1
+    },
+    {
+      "race": "dwarf",
+      "place": "mountain",
+      "random": true,
+      "size": 1
+    }
+  ]
+}
