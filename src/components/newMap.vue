@@ -25,14 +25,54 @@
       >
         testDist
       </button>
+      <input
+        type="number"
+        placeholder="offset"
+        v-model="offsetX"
+      >
+      <input
+        type="number"
+        placeholder="offset"
+        v-model="offsetY"
+      >
     </div>
-    <div>
-      <canvas
-        id="voronoiCanvas"
-        :width="size.width"
-        :height="size.height"
-        @click="click($event)"
-      ></canvas>
+    <div style="display: flex; justify-content: center; margin-top: 25px">
+      <div style="max-width: 876px">
+        <div style="display: flex; justify-content: center;">
+          <button
+            style="width: 100%"
+            @click="offset('Y', -8)"
+          >
+            up
+          </button>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <button
+            @click="offset('X', -10)"
+          >
+            left
+          </button>
+          <canvas
+            id="voronoiCanvas"
+            :width="size.width"
+            :height="size.height"
+            @click="click($event)"
+          ></canvas>
+          <button
+            @click="offset('X', 10)"
+          >
+            right
+          </button>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <button
+            style="width: 100%"
+            @click="offset('Y', 8)"
+          >
+            down
+          </button>
+        </div>
+      </div>
     </div>
     <div>
       cell info:
@@ -43,15 +83,15 @@
 
 <script>
 /* eslint-disable */
-import Voronoi from '@/scripts/rhill-voronoi-core.js';
-import QuadTree from '@/scripts/QuadTree.js';
-import { voronoi } from '@/assets/mock.js'
-import { distance, Hex, hex_lerp } from '@/scripts/hex.js';
-import { highlightCell, getRandomFrom, generateGrid, generateHexGrid } from '@/scripts/helpers.js';
-import quest_marker from '@/assets/icons/quest_marker.png'
-import human_city from '@/assets/icons/human_city.png'
-import dwarf_city from '@/assets/icons/dwarf_city.png'
-import elven_city from '@/assets/icons/elven_city.png'
+import Voronoi from '../scripts/rhill-voronoi-core.js'
+import QuadTree from '../scripts/QuadTree.js'
+import { voronoi } from '../assets/mock.js'
+import { distance, Hex, hex_lerp } from '../scripts/hex.js'
+import { highlightCell, getRandomFrom, generateGrid, generateHexGrid } from '../scripts/helpers.js'
+import quest_marker from '../assets/icons/quest_marker.png'
+import human_city from '../assets/icons/human_city.png'
+import dwarf_city from '../assets/icons/dwarf_city.png'
+import elven_city from '../assets/icons/elven_city.png'
 
 export default {
   data () {
@@ -61,6 +101,8 @@ export default {
       hexGrid: [],
       highlightCell: highlightCell,
       seed: null,
+      offsetX: 0,
+      offsetY: 0,
       images: {
         quest_marker: quest_marker,
         human_city: human_city,
@@ -317,6 +359,10 @@ export default {
         y: evt.clientY - rect.top,
       }
     },
+    offset (where, amount) {
+      this[`offset${where}`] += amount
+      this.perlin()
+    },
     perlin () {
       /* esilnt-disable */
       console.log('loading perlin')
@@ -380,7 +426,7 @@ export default {
             grid.push([])
             for(let col = 0; col < this.cols; col++) {
               grid[row].push(0)
-              var value = this.noise.simplex2(row / this.rows, col / this.cols);
+              var value = this.noise.simplex2((row + Number(this.offsetX)) / this.rows, (col + Number(this.offsetY)) / this.cols);
 
               let cellID
               if (this.voronoiType == 'square') {

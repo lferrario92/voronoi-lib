@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Voronoi from '@/scripts/rhill-voronoi-core.js';
+import Voronoi from '../scripts/rhill-voronoi-core.js'
 
 Vue.use(Vuex)
 

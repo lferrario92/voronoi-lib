@@ -1,4 +1,4 @@
-import * as quest_marker from '@/assets/icons/quest_marker.png';
+import * as quest_marker from '../assets/icons/quest_marker.png'
 
 export function getRandomFrom(where) {
   return where[Math.floor(Math.random() * where.length)]

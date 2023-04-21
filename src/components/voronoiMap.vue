@@ -34,17 +34,17 @@
 </template>
 
 <script>
-import Voronoi from '@/scripts/rhill-voronoi-core.js';
-import QuadTree from '@/scripts/QuadTree.js';
-import { highlightCell, highlightSector, addQuestMarker, getRandomFrom } from '@/scripts/helpers.js';
+import Voronoi from '../scripts/rhill-voronoi-core.js';
+import QuadTree from '../scripts/QuadTree.js';
+import { highlightCell, highlightSector, addQuestMarker, getRandomFrom } from '../scripts/helpers.js';
 
 import { mapGetters } from 'vuex'
 
-import quest_marker from '@/assets/icons/quest_marker.png';
-import tree from '@/assets/icons/tree.png';
-import deepTree from '@/assets/icons/deepTree.png';
-import palmTree from '@/assets/icons/palmTree.png';
-import mountain from '@/assets/icons/mountain.webp';
+import quest_marker from '../assets/icons/quest_marker.png';
+import tree from '../assets/icons/tree.png';
+import deepTree from '../assets/icons/deepTree.png';
+import palmTree from '../assets/icons/palmTree.png';
+import mountain from '../assets/icons/mountain.webp';
 
 export default {
   data() {
@@ -449,7 +449,7 @@ export default {
 
       this.$store.commit('resetBiomas')
 
-      import('@/scripts/perlin.js').then((perlin) => {
+      import('../scripts/perlin.js').then((perlin) => {
         console.log('applying perlin...')
 
         this.noise = perlin.default.noise
